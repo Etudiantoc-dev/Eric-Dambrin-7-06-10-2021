@@ -1,7 +1,7 @@
 const express = require('express');
 const userRoutes = require('./routes/user');
 const publicationsRoutes = require('./routes/publications');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const path = require('path');
 
 const app = express();
@@ -15,18 +15,23 @@ const app = express();
     host     : 'localhost',
     user     : 'root',
     password : '',
-    database : 'Groupomania'
+    database : 'Groupomania',
+    socketPath : "/Applications/MAMP/tmp/mysql/mysql.sock"
+    
+    
 
  })
  console.log(db)
 
 
-  db.connect((err)=>{
-    if(err){
-        throw err;
+db.connect(function(err) {
+    if (err) {
+      console.error('error connecting: ' + err.stack);
+      return;
     }
-    concole.log('MySQL is connecting')
-})
+   
+    console.log('connected as id ' + connection.threadId);
+  });
 
 
 // Create db
@@ -39,6 +44,7 @@ app.get( (req, res)=>{
         res.send('Database created...')
     })
 })
+
 
 // app.use((req, res, next) => {//Pour éviter l'erreur CORS = méthode de sécurité par défaut (bloque les appels HTTP d'être effectués entre des serveurs différents) //Configurer les bons headers 
 //     res.setHeader('Access-Control-Allow-Origin', '*');//Accés à l'API depuis n'importe quelle origine
