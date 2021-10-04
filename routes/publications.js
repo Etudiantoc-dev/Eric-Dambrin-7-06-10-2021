@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();//methode routeur d'express pour faire router.post au lieu de app.post par exemple
-const publicationsCtrl = require('../controllers/sauces');
+const publicationsCtrl = require('../controllers/publications');
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer.config');
 

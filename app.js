@@ -2,6 +2,7 @@ const express = require('express');
 const userRoutes = require('./routes/user');
 const publicationsRoutes = require('./routes/publications');
 const mysql = require('mysql');
+const path = require('path');
 
 const app = express();
 
@@ -9,35 +10,35 @@ const app = express();
 //Create connection
 
 
-//  const db = mysql.createConnection({
+ const db = mysql.createConnection({
     
-//     host     : 'localhost',
-//     user     : 'root',
-//     password : '',
-//     database : 'foodly'
+    host     : 'localhost',
+    user     : 'root',
+    password : '',
+    database : 'Groupomania'
 
-//  })
-//  console.log(db)
-
-
-//   db.connect((err)=>{
-//     if(err){
-//         throw err;
-//     }
-//     concole.log('MySQL is connecting')
-// })
+ })
+ console.log(db)
 
 
-//Create db
+  db.connect((err)=>{
+    if(err){
+        throw err;
+    }
+    concole.log('MySQL is connecting')
+})
 
-// app.get( (req, res)=>{
-//     let sql = 'CREATE DATABASE MYSQL';
-//     db.query(sql, (err, result)=>{
-//         if (err) throw err;
-//         console.log(result)
-//         res.send('Database created...')
-//     })
-// })
+
+// Create db
+
+app.get( (req, res)=>{
+    let sql = 'CREATE DATABASE MYSQL';
+    db.query(sql, (err, result)=>{
+        if (err) throw err;
+        console.log(result)
+        res.send('Database created...')
+    })
+})
 
 // app.use((req, res, next) => {//Pour éviter l'erreur CORS = méthode de sécurité par défaut (bloque les appels HTTP d'être effectués entre des serveurs différents) //Configurer les bons headers 
 //     res.setHeader('Access-Control-Allow-Origin', '*');//Accés à l'API depuis n'importe quelle origine
@@ -49,7 +50,7 @@ const app = express();
 
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use('/api/publications', saucesRoutes);
+app.use('/api/publications', publicationsRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/', (req, res, next) => { res.send('hello') });
 

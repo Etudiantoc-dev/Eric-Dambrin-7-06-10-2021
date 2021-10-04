@@ -1,7 +1,7 @@
 const fs = require("fs"); //= file System 
-const Publication = require("../models/sauce");
+const Publication = require("../models/publications");
 
-exports.createSauce = (req, res, next) => {
+exports.createPublication = (req, res, next) => {
   const publicationObject = JSON.parse(req.body.publication);
   const publication = new Publication({
     ...publicationObject, //Spread = raccourci pour accéder au corp (shéma sauce ici) de la requète et évite de tout énumérer
