@@ -1,5 +1,5 @@
 const express = require('express');
-// const mysql = require('mysql');
+const mysql = require('mysql');
 
 const app = express();
 
@@ -11,8 +11,8 @@ const app = express();
     
 //     host     : 'localhost',
 //     user     : 'root',
-//     password : 'root',
-//     database : 'MySQL'
+//     password : '',
+//     database : 'foodly'
 
 //  })
 //  console.log(db)
