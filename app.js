@@ -1,4 +1,6 @@
 const express = require('express');
+const userRoutes = require('./routes/user');
+const publicationsRoutes = require('./routes/publications');
 const mysql = require('mysql');
 
 const app = express();
@@ -44,5 +46,11 @@ const app = express();
 //     next();
 //   });
 
+
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/api/publications', saucesRoutes);
+app.use('/api/auth', userRoutes);
+app.use('/', (req, res, next) => { res.send('hello') });
 
 module.exports = app;
