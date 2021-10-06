@@ -21,7 +21,7 @@ const app = express();
     
 
 })
- console.log(db)
+//  console.log(db)
 
 
 db.connect(function(err) {
@@ -30,19 +30,22 @@ db.connect(function(err) {
       return;
     }
    
-    console.log('connecté à mysql' );
+    console.log('connecté à mysql' ); 
   });
 
 // Create db
 
-// app.get( (req, res)=>{
-//     let sql = 'CREATE DATABASE MYSQL';
-//     db.query(sql, (err, result)=>{
-//         if (err) throw err;
-//         console.log(result)
-//         res.send('Database created...')
-//     })
-// })
+app.get( '/',(req, res)=>{
+
+    db.query('SELECT * FROM Groupomania', (err, result)=>{
+        if (err) throw err;
+        console.log(result)
+        res.send('Database created...')
+    })
+})
+app.listen(1337)
+console.log(db)
+
 
 
 app.use((req, res, next) => {//Pour éviter l'erreur CORS = méthode de sécurité par défaut (bloque les appels HTTP d'être effectués entre des serveurs différents) //Configurer les bons headers 
@@ -60,3 +63,4 @@ app.use('/api/auth', userRoutes);
 app.use('/', (req, res, next) => { res.send('hello') });
 
 module.exports = app;
+
