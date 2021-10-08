@@ -2,14 +2,14 @@ const fs = require("fs"); //= file System
 const Publication = require("../models/publications");
 
 exports.createPublication = (req, res, next) => {
-  const publicationObject = JSON.parse(req.body.publication);
-  const publication = new Publication({
-    ...publicationObject, //Spread = raccourci pour accéder au corp (shéma sauce ici) de la requète et évite de tout énumérer
+  const publication = JSON.parse(req.body.publication);
+   publication = new Publication({
+    ...Publication, //Spread = raccourci pour accéder au corp (shéma sauce ici) de la requète et évite de tout énumérer
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 
   });
-  publication.save()
-    .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
+  publication.create()
+    .then(() => res.status(201).json({ message: 'publication créé !' }))
     .catch(error => res.status(400).json({ error }));
 
 };

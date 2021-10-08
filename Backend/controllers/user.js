@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt'); // package bcript(Algorithme de chiffrement) installé
 const jwt = require('jsonwebtoken');// Identificateur de Session, code perso généré pour être reconnu sur l'application pendant un temps donné..
+const app = require('../app');
 const User = require('../models/user');
 
 
@@ -15,14 +16,20 @@ exports.signup = (req, res, next) => { //Méthode s'inscrire //pour enregistrer 
         email: req.body.email,
         password: hash//mot de passe crypté
       });
-
-      console.log(user);
-      user.save()// pour enregistrer dans la base de donnée
+      user.create() 
+      console.log(user)
         .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
         .catch(error => res.status(400).json({ error }));
-    })
-    .catch(error => res.status(500).json({ error }));
+})
+.catch(error => res.status(500).json( {error}))
 };
+
+
+
+
+
+
+
 exports.login = (req, res, next) => { // Permet aux utilisateurs existant de se connecter(vérification des informations)
   User.findOne({ email: req.body.email })//Vérification si email inscrit correspond à un utilisateur existant
     .then(user => {
