@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt'); // package bcript(Algorithme de chiffrement) installé
 const jwt = require('jsonwebtoken');// Identificateur de Session, code perso généré pour être reconnu sur l'application pendant un temps donné..
 const app = require('../app');
-const User = require('../models/user');
+const User = require('../models/utilisateur');
 
 
 exports.signup = (req, res, next) => { //Méthode s'inscrire //pour enregistrer les utilisateurs crypte le mot de passe avec lequel cré le nouveau utilisateur avec son adresse email
@@ -10,25 +10,24 @@ exports.signup = (req, res, next) => { //Méthode s'inscrire //pour enregistrer 
     .then(hash => { // Asynchrone donc création des .then et .catch
       console.log(hash);
       const user = new User({ // ce qui est requis pour l'inscription d'un utilisateur
-        id : req.body.id, // Dois-je mettre L'ID??
+        id : req.body.id, 
         nom : req.body.nom,
         prenom : req.body.prenom,
         email: req.body.email,
         password: hash//mot de passe crypté
       });
-      user.create() 
-      console.log(user)
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-        .catch(error => res.status(400).json({ error }));
+      User.create(user, (err, data) => {
+        if (err) {
+            if (!user) { // ???
+                return res.status(401).json({ error });
+            }
+        }
+        res.send(data);
+        console.log(data + 'Compte créé !');
+    });
 })
-.catch(error => res.status(500).json( {error}))
+.catch(error => res.status(500).json( error + ' Salut les gens' ));
 };
-
-
-
-
-
-
 
 exports.login = (req, res, next) => { // Permet aux utilisateurs existant de se connecter(vérification des informations)
   User.findOne({ email: req.body.email })//Vérification si email inscrit correspond à un utilisateur existant
@@ -54,17 +53,9 @@ exports.login = (req, res, next) => { // Permet aux utilisateurs existant de se 
     })
     .catch(error => res.status(500).json({ error }));
 };
-async function getUser(){
-  try{
-    let pool = await mysql.connect(modelUser);
-    let Groupomania = pool.request().query("SELECT * FROM orders");
-    return Groupomania.recordsets;
-  }
-  catch(error){
-    console.log(error);
 
-  }
 
-}
+
+
 
 

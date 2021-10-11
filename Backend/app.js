@@ -1,29 +1,8 @@
 const express = require('express');
-const userRoutes = require('./routes/user');
-const publicationsRoutes = require('./routes/publications');
+const userRoutes = require('./routes/utilisateur');
+const publicationsRoutes = require('./routes/publication');
 const path = require('path');
 const app = express();
-// const config = require('./middleware/config')
-// const db = require('./config/db');
-
-
-
-
-// app.get ('/', (req, res)=>{
-//   var sql2 = "CREATE TABLE Employees " +
-//         " (Id INT not null AUTO_INCREMENT, " +
-//         " Emp_No VARCHAR(20), " +
-//         " Full_Name VARCHAR(255), " +
-//         " Hire_Date DATE, " +
-//         " PRIMARY KEY (Id) )";
-
-//     db.query(sql2, function(err, results) {
-//         if (err) throw err;
-//         console.log("Table Employees created");
-//     });
-//   })
-// app.listen(3000)
-
 
 
 app.use((req, res, next) => {//Pour éviter l'erreur CORS = méthode de sécurité par défaut (bloque les appels HTTP d'être effectués entre des serveurs différents) //Configurer les bons headers 
@@ -42,6 +21,7 @@ app.use('/', (req, res, next) => { res.send('hello') });
 
 
 module.exports = app;
+
 
 
 
