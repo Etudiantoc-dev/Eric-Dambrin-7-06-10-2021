@@ -22,7 +22,6 @@ exports.createPublication = (req, res, next) => {
 });
 };
 
-
 exports.getOnePublication = (req, res, next) => {//récupération d'un Objet
   Publication.findOne({ _id: req.params.id })// Methode findOne pour trouver un seul objet
     .then(publication => res.status(200).json(publication))//reponse

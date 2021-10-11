@@ -19,13 +19,13 @@ db.connect(function(err) {
       console.error('error connecting: ' + err.stack);
       return;
     }})
-  //   db.query("SELECT * FROM utilisateur", function (err, result) {
-  //       if (err) throw err;
-  //       console.log(result);
-  //     });
+    db.query("SELECT * FROM utilisateur", function (err, result) {
+        if (err) throw err;
+        console.log(result);
+      });
    
     console.log('connecté à mysql' ); 
-  // });
+ 
   
 
     
