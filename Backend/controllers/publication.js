@@ -16,17 +16,11 @@ exports.createPublication = (req, res, next) => {
             message: err.message || "Des erreurs se sont produites !",
             
         });
-        
-       
-    }
+        }
     console.log(data);
     res.send(data);
 });
 };
-
-
-            
-
 
 
 exports.getOnePublication = (req, res, next) => {//récupération d'un Objet
