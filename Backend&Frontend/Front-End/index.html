@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link rel="stylesheet" href="../Front-End/index.css" />
     <link rel="icon" type="image/png" sizes="16x16" href="../Front-End/images/icon.png" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,10 +11,38 @@
 <body>
     <div id="app">
         <header> 
-            <h1>Réseau social Groupomania</h1>
             
-        
+            <img class="logo_header" src="../Front-End/images/icon-left-font.png"  alt="Logo de l'entreprise Groupomania">
+            
+            <h1>Réseau social des employés</h1>
+            <ul>
+                <li> <a href="inscription">Inscription</a></li>
+                <li> <a href="connexion">Connexion</a></li>
+                <li><a href="forum">Forum</a></li>
+                
+            </ul>
+
+            
+          
         </header>
+        <section>
+            <aside>
+            <div class="formulaire_connexion">
+                  <div class="form_group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Adresse Email" />
+                  </div>
+                  <div class="form_group">
+                    <label for="password">Mot de passe</label>
+                    <input type="text" class="form-control" id="password" name="password" placeholder="Mot de passe" />
+                  </div>
+                  <div class="form_group">
+                    <input type="submit" value="Connexion" class="bouton_connexion" id="bouton" />
+                    <p id="erreur" style="color: orangered; width: max-content"></p>
+                  </div>
+            </div>
+            </aside>
+        </section>
 </div>
     
     
