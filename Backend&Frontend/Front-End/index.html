@@ -9,12 +9,12 @@
     <title>Groupomania</title>
 </head>
 <body>
-    <div id="app">
+    <div id="app" >
         <header> 
             
             <img class="logo_header" src="../Front-End/images/icon-left-font.png"  alt="Logo de l'entreprise Groupomania">
             
-            <h1>Réseau social des employés</h1>
+            <h1>{{titre}}</h1>
             <ul>
                 <li> <a href="inscription">Inscription</a></li>
                 <li> <a href="connexion">Connexion</a></li>
@@ -27,8 +27,8 @@
         </header>
         <section>
             <aside>
-            <div class="formulaire_connexion">
-                  <div class="form_group">
+            <form
+                   class="form_group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Adresse Email" />
                   </div>
@@ -40,11 +40,21 @@
                     <input type="submit" value="Connexion" class="bouton_connexion" id="bouton" />
                     <p id="erreur" style="color: orangered; width: max-content"></p>
                   </div>
-            </div>
+            </form>
             </aside>
         </section>
-</div>
-    
-    
+      </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: "#app",
+    data:{
+      titre:'Réseau social des employés',
+    }})
+  
+  
+  </script>
+  
 </body>
+
 </html>
