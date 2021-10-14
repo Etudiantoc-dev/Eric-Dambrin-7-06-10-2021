@@ -2,11 +2,12 @@
 const db = require('../config/db');
 
 class User {
-    constructor(id, nom, prenom, email) {
-        this.id = id;
+    constructor( nom, prenom, email, password) {
+        // this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
+        this.password = password;
     }
 
 

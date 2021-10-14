@@ -10,23 +10,23 @@ exports.signup = (req, res, next) => { //Méthode s'inscrire //pour enregistrer 
     .then(hash => { // Asynchrone donc création des .then et .catch
       console.log(hash);
       const user = new User({ // ce qui est requis pour l'inscription d'un utilisateur
-        id : req.body.id, 
-        nom : req.body.nom,
-        prenom : req.body.prenom,
+        // id : req.body.id, 
+        nom: req.body.nom,
+        prenom: req.body.prenom,
         email: req.body.email,
         password: hash//mot de passe crypté
       });
       User.create(user, (err, data) => {
         if (err) {
-            if (!user) { // ???
-                return res.status(401).json({ error });
-            }
+          if (!user) { // ???
+            return res.status(401).json({ error });
+          }
         }
         res.send(data);
         console.log(data + 'Compte créé !');
-    });
-})
-.catch(error => res.status(500).json( error + ' Salut les gens' ));
+      });
+    })
+    .catch(error => res.status(500).json(error + ' Salut les gens'));
 };
 
 exports.login = (req, res, next) => { // Permet aux utilisateurs existant de se connecter(vérification des informations)
