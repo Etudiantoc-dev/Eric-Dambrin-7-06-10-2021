@@ -1,6 +1,5 @@
 const db = require('../Config/db');
 
-
 class Publication {
     constructor(id, titre, article, image) {
         this.id = id;
@@ -9,7 +8,7 @@ class Publication {
         this.image = image;
     }
     create(newPublication, callback) {
-        db = newPublication.query("INSERT INTO publication", newPublication, (err, res) => {
+        db.query("INSERT INTO publication", newPublication, (err, res) => {
 
             if (err) {
                throw err;
@@ -18,7 +17,7 @@ class Publication {
         })
     }
     find(Publication, callback){
-        db = Publication.query("SELECT * FROM publication", Publication,(err, res)=>{
+        db.query("SELECT * FROM publication", Publication,(err, res)=>{
             if (err) {
                 throw err;
              }
@@ -27,14 +26,14 @@ class Publication {
         
     }
     updateOne(publicationModify,callback){
-        db = publicationModify.query("UPDATE publication", publicationModify, (err,res)=>{
+        db.query("UPDATE publication", publicationModify, (err,res)=>{
             if (err) {
                 throw err;
              }
              return callback(res);
          })}
     deleteOne(publicationDelete, callback){
-        db = publicationDelete.query("DELETE * FROM publication", publicationDelete, (err,res)=>{
+        db.query("DELETE * FROM publication", publicationDelete, (err,res)=>{
             if (err) {
                 throw err;
              }

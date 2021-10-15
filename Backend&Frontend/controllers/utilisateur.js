@@ -5,29 +5,37 @@ const User = require('../models/utilisateur');
 
 
 exports.signup = (req, res, next) => { //Méthode s'inscrire //pour enregistrer les utilisateurs crypte le mot de passe avec lequel cré le nouveau utilisateur avec son adresse email
-  bcrypt.hash(req.body.password, 10) //hash avec argument mot de passe et le nombre d'algorythme de hashage et  créé par bcrypt pour enregistrer le user dans la base de donné par la suite
-
-    .then(hash => { // Asynchrone donc création des .then et .catch
-      console.log(hash);
+  // bcrypt.hash(req.body.password, 10) //hash avec argument mot de passe et le nombre d'algorythme de hashage et  créé par bcrypt pour enregistrer le user dans la base de donné par la suite
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+  // .then(user => { // Asynchrone donc création des .then et .catch
+  //     console.log(hash);
       const user = new User({ // ce qui est requis pour l'inscription d'un utilisateur
         // id : req.body.id, 
         nom: req.body.nom,
         prenom: req.body.prenom,
         email: req.body.email,
-        password: hash//mot de passe crypté
+        // password: req.body.password//mot de passe crypté
       });
+     
       User.create(user, (err, data) => {
-        if (err) {
-          if (!user) { // ???
-            return res.status(401).json({ error });
-          }
-        }
-        res.send(data);
-        console.log(data + 'Compte créé !');
-      });
-    })
-    .catch(error => res.status(500).json(error + ' Salut les gens'));
-};
+        if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the Customer."
+        });
+      else res.send(data);
+    });
+      
+      next()
+      
+    }
+    // console.log(password)
+
+
 
 exports.login = (req, res, next) => { // Permet aux utilisateurs existant de se connecter(vérification des informations)
   User.findOne({ email: req.body.email })//Vérification si email inscrit correspond à un utilisateur existant
