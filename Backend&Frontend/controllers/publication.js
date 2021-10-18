@@ -29,7 +29,7 @@ exports.getOnePublication = (req, res, next) => {//récupération d'un Objet
 
 }
 exports.getAllPublications = (req, res, next) => {
-  Publication.find(req.body.publication) // Pour récupérer toutes les publications
+  Publication.find() // Pour récupérer toutes les publications
     .then( publications => res.status(200).json(publications))
     .catch (error => res.status(400).json({error}));
       

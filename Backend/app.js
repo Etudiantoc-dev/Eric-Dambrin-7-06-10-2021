@@ -15,9 +15,9 @@ app.use((req, res, next) => {//Pour éviter l'erreur CORS = méthode de sécurit
 
 app.use(express.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use('/api/publications', publicationsRoutes);
+app.use('/api/publication', publicationsRoutes);
 app.use('/api/auth', userRoutes);
-app.use('/', (req, res, next) => { res.send('hello') });
+
 
 
 module.exports = app;
