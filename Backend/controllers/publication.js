@@ -65,10 +65,10 @@ exports.modifyPublication = (req, res, next) => {
 
 }
 exports.deletePublication = (req, res, next) => {
-  // Publication.findOne({ _id: req.params.id })
+  Publication.findOne({ _id: req.params.id })
   // .then(publication => {
-  //   const filename = publication.imageUrl.split('/images/')[1];
-  //   fs.unlink(`images/${filename}`, () => {
+    // const filename = publication.imageUrl.split('/images/')[1];
+    // fs.unlink(`images/${filename}`, () => {
   Publication.deleteOne({ _id: req.params.id }, (err, data) => {
     if (err)
       res.status(500).send({
@@ -76,12 +76,14 @@ exports.deletePublication = (req, res, next) => {
           err.message || "Some error occurred while creating the Customer."
       });
     else res.send(data);
-    next()
+  
   })
-};
+  next() // Pour éviter que ça tourne en boucle...??
+;
 
 
 // .catch(error => res.status(500).json({ error }));
 
 ;
 
+}
