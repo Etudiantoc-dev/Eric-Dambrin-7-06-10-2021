@@ -39,6 +39,21 @@ User.findOne = (newUser) => {
 
 
 };
+User.find = (allUser)=>{
+    db.query('SELECT * FROM utilisateur',allUser,(err,res)=>{
+        if (err) {
+            console.log("error: ", err);
+
+            return;
+        }
+
+        if (res.length) {
+            console.log("found allUser: ", res[0]);
+
+            return;
+        }
+    })
+}
 
 
 module.exports = User

@@ -43,8 +43,23 @@ exports.login = (req, res, next) => {
         });
       }
     } else res.send(data);
+
+  User.find(req.body.allUser, (err, data)=>{
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Customer with id ${req.body.allUser}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Customer with id " + req.body.allUser
+        });
+      }
+    } else res.send(data);
+  })
     
-  });next()
+  }
+  );next()
 
 };
 

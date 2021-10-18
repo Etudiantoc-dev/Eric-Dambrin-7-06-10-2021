@@ -11,7 +11,7 @@ const db = require('../Config/db');
 const Publication = function (publication){
     this.titre = publication.titre;
     this.article = publication.article;
-    this.image = publication.image
+    this.image = publication.image;
 }
     Publication.create = (newPublication, result) => {
         db.query("INSERT INTO publication SET ?", newPublication, (err, res) => {
@@ -26,38 +26,41 @@ const Publication = function (publication){
             result(null, { id: res.insertId, ...newPublication });
         })
     }
-    Publication.find = (Publication, callback) =>{
+    Publication.find = (Publication) =>{
         db.query("SELECT * FROM publication", Publication,(err, res)=>{
             if (err) throw err;
                 console.log(res);
          })
         
     }
-    Publication.findOne = (Publication, callback) =>{
-        db.query("SELECT * FROM publication WHERE id", Publication,(err, res)=>{
+    Publication.findOne = (Publication) =>{
+        db.query("SELECT * FROM publication WHERE id" , Publication,(err, res)=>{
             if (err) throw err;
                 console.log(res);
         
          })
         }
-    Publication.updateOne =(publicationModify,callback) =>{
-        db.query("UPDATE publication", publicationModify, (err,res)=>{
+    Publication.updateOne =(publicationModify) =>{
+        db.query("UPDATE publication SET ? ", publicationModify, (err,res)=>{
+            if (err) throw err;
+            console.log(res);
+
+         })
+        }
+    Publication.deleteOne = (publicationDelete)=>{
+        db.query("DELETE FROM publication", publicationDelete, (err,res)=>{
             if (err) {
                 throw err;
              }
-             return callback(res);
-         })}
-    Publication.deleteOne = (publicationDelete, callback)=>{
-        db.query("DELETE * FROM publication", publicationDelete, (err,res)=>{
-            if (err) {
-                throw err;
-             }
-             return callback(res);
+             return (res);
          })
         
     }
+
         
 
 
 module.exports = Publication
+
+
 
