@@ -23,7 +23,7 @@ User.create = (newUser, result) => {
 
 }
 User.findOne = (newUser) => {
-    db.query('SELECT * FROM utilisateur WHERE id', newUser, (err, res) => {
+    db.query("SELECT * FROM utilisateur WHERE id", newUser, (err, res) => {
         if (err) {
             console.log("error: ", err);
 
@@ -39,21 +39,5 @@ User.findOne = (newUser) => {
 
 
 };
-User.find = (allUser)=>{
-    db.query('SELECT * FROM utilisateur',allUser,(err,res)=>{
-        if (err) {
-            console.log("error: ", err);
-
-            return;
-        }
-
-        if (res.length) {
-            console.log("found allUser: ", res[0]);
-
-            return;
-        }
-    })
-}
-
 
 module.exports = User

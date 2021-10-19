@@ -34,7 +34,7 @@ const Publication = function (publication){
         
     }
     Publication.findOne = (Publication) =>{
-        db.query("SELECT * FROM publication WHERE id" , Publication,(err, res)=>{
+        db.query("SELECT * FROM publication WHERE ID " , Publication,(err, res)=>{
             if (err) throw err;
                 console.log(res);
         
@@ -46,9 +46,10 @@ const Publication = function (publication){
             console.log(res);
 
          })
+
         }
     Publication.deleteOne = (publicationDelete)=>{
-        db.query("DELETE FROM publication", publicationDelete, (err,res)=>{
+        db.query("DELETE FROM publication WHERE id", publicationDelete, (err,res)=>{
             if (err) {
                 throw err;
              }
@@ -56,6 +57,7 @@ const Publication = function (publication){
          })
         
     }
+
 
         
 
