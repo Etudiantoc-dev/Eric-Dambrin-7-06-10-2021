@@ -1,48 +1,34 @@
 const fs = require("fs"); //= file System 
 const Publication = require("../models/publication");
+const db = require ("../Config/db")
+exports.createPublication = (req, res, next) => {//?????????????
+ 
+     
+  db.query(`INSERT INTO publication VALUES ( '${req.params.id}','${req.body.titre}', '${req.body.article}','${req.body.image}')`, (error) => {
+    if (error) {
+        return res.status(400).json({
+            error
+        });
+    }
+    return res.status(201).json({
+        message: 'Votre post à été publié !'
+    })
+});
+};
+  
 
-exports.createPublication = (req, res, next) => {
-  // const publication = JSON.parse(req.body.publication);
-  if (!req.body.publication) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-  }
+exports.getOnePublication = (req, res, next) => {//ok
+  db.query(`SELECT * FROM publication WHERE publication.id = ${req.params.id}`, (error, result, field) => {
+    if (error) {
+        return res.status(400).json({
+            error
+        });
+    }
+    return res.status(200).json(result);
+});
+};
 
-
-  const publication = new Publication({
-    ...Publication,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file}`
-  });
-
-Publication.create(publication, (err, data) => {
-
-    if (err)
-      return res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Customer."
-      });
-    else res.send(data);
-  });
-
-
-
-  next()
-
-}
-
-exports.getOnePublication = (req, res, next) => {
-  Publication.findOne((err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Customer."
-      });
-    else res.send(data);
-  });
-}
-
-exports.getAllPublications = (req, res, next) => {
+exports.getAllPublications = (req, res, next) => {//ok
   Publication.find((err, data) => {
     if (err)
       res.status(500).send({
@@ -53,7 +39,7 @@ exports.getAllPublications = (req, res, next) => {
   });
 }
 
-exports.modifyPublication = (req, res, next) => {
+exports.modifyPublication = (req, res, next) => {//????????
   const publicationObject = req.file ?
     {
       ...JSON.parse(req.body.publication),
@@ -64,26 +50,20 @@ exports.modifyPublication = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 
 }
-exports.deletePublication = (req, res, next) => {
-  Publication.findOne({ _id: req.params.id })
-  // .then(publication => {
-    // const filename = publication.imageUrl.split('/images/')[1];
-    // fs.unlink(`images/${filename}`, () => {
-  Publication.deleteOne({ _id: req.params.id }, (err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Customer."
-      });
-    else res.send(data);
-  
+
+exports.deletePublication = (req, res, next) => {//ok
+  let postID = req.params["id"];
+  let sqlDelete = `DELETE FROM publication WHERE publication.id = ${req.params.id}`;
+  db.query(sqlDelete, function(error) {
+      if (error) {
+          return res.status(500).json(error);
+      } else {
+          return res.status(200).json({
+              message: "Publication supprimée"
+          });
+      }
   })
-  next() // Pour éviter que ça tourne en boucle...??
-;
+};
 
 
-// .catch(error => res.status(500).json({ error }));
 
-;
-
-}

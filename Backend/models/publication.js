@@ -8,22 +8,23 @@ const db = require('../Config/db');
 //         this.article = article;
 //         this.image = image;
 //     }
-const Publication = function (publication){
-    this.titre = publication.titre;
-    this.article = publication.article;
-    this.image = publication.image;
+const Publication = function (titre,article,image){
+    this.titre = titre;
+    this.article = article;
+    this.image = image;
 }
-    Publication.create = (newPublication, result) => {
+    Publication.create = (newPublication) => {
         db.query("INSERT INTO publication SET ?", newPublication, (err, res) => {
 
             if (err) {
                 console.log("error: ", err);
-                result(err, null);
+                
                 return;
             }
 
+
             console.log("created publication: ", { id: res.insertId, ...newPublication });
-            result(null, { id: res.insertId, ...newPublication });
+            
         })
     }
     Publication.find = (Publication) =>{
@@ -33,8 +34,8 @@ const Publication = function (publication){
          })
         
     }
-    Publication.findOne = (Publication) =>{
-        db.query("SELECT * FROM publication WHERE ID " , Publication,(err, res)=>{
+    Publication.findOne = (publication) =>{
+        db.query("SELECT * FROM publication WHERE ID " , publication,(err, res)=>{
             if (err) throw err;
                 console.log(res);
         
