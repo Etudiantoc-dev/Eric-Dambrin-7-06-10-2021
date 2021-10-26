@@ -2,12 +2,13 @@
 const db = require('../Config/db');
 
 
+
 const User = function (user) {
 
     this.nom = user.nom;
     this.prenom = user.prenom;
     this.email = user.email;
-    // this.password = user.password;
+    this.password = user.password;
 };
 User.create = (newUser, result) => {
     db.query("INSERT INTO utilisateur SET ?", newUser, (err, res) => {

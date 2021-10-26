@@ -3,9 +3,11 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/utilisateur');
 
 
-exports.signup = (req, res, next) => { //création ok sans le hash mais null partout???
+exports.signup = (req, res, next) => { //création ok avec format texte dans le body de talend API
+  console.log(req.body)
   bcrypt.hash(req.body.password, 10) 
     .then(hash => { 
+  
 
   if (!req.body) {
     res.status(400).send({
@@ -31,7 +33,8 @@ exports.signup = (req, res, next) => { //création ok sans le hash mais null par
   
 }
 
-exports.login =(req, res, next) => { // Permet aux utilisateurs existant de se connecter(vérification des informations)
+
+exports.login =(req, res, next) => { // ???
   User.findOne({ email: req.body.email })//Vérification si email inscrit correspond à un utilisateur existant
     .then(user => {
       if (!user) {
