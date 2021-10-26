@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/utilisateur');
 
 
-exports.signup = (req, res, next) => { 
+exports.signup = (req, res, next) => { //création ok sans le hash mais null partout???
   bcrypt.hash(req.body.password, 10) 
     .then(hash => { 
 
@@ -17,7 +17,7 @@ exports.signup = (req, res, next) => {
     nom: req.body.nom,
     prenom: req.body.prenom,
     email: req.body.email,
-    password: hash//mot de passe crypté
+    password: hash
   });
   User.create(user, (err, data) => {
     if (err) {
@@ -28,12 +28,12 @@ exports.signup = (req, res, next) => {
     res.send(data);
     console.log(data + 'Compte créé !');
   })})
-  next();
+  
 }
 
-exports.login = (req, res, next) => { // Permet aux utilisateurs existant de se connecter(vérification des informations)
+exports.login =(req, res, next) => { // Permet aux utilisateurs existant de se connecter(vérification des informations)
   User.findOne({ email: req.body.email })//Vérification si email inscrit correspond à un utilisateur existant
-    // .then(user => {
+    .then(user => {
       if (!user) {
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
@@ -52,7 +52,7 @@ exports.login = (req, res, next) => { // Permet aux utilisateurs existant de se 
           });
         })
         .catch(error => res.status(500).json({ error }));
-    }
+    })}
 
  
 

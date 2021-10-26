@@ -2,9 +2,9 @@ const fs = require("fs"); //= file System
 const Publication = require("../models/publication");
 const db = require ("../Config/db")
 
-exports.createPublication = (req, res, next) => {//?????????????
-  let publication = req.body;
-  db.query(`INSERT INTO publication VALUES ( '${req.params.id}','${publication.titre}', '${publication.article}','${publication.image}')`, (error) => {
+exports.createPublication = (req, res, next) => {//????
+  
+  db.query(`INSERT INTO publication VALUES ( '${req.params.id}','${req.body.titre}', '${req.body.article}','${req.body.image}')`, (error) => {
     if (error) {
         return res.status(400).json({
             error
@@ -15,6 +15,7 @@ exports.createPublication = (req, res, next) => {//?????????????
     })
 });
 };
+
   
 
 exports.getOnePublication = (req, res, next) => {//ok
@@ -39,7 +40,7 @@ exports.getAllPublications = (req, res, next) => {//ok
   });
 }
 
-exports.modifyPublication = (req, res, next) => {//????????
+exports.modifyPublication = (req, res, next) => {//ok
   db.query(`UPDATE publication SET titre = '${req.body.titre}', article = '${req.body.article}' WHERE publication.id = ${req.params.id}`, (error, result, field) => {
     if (error) {
         return res.status(400).json({
