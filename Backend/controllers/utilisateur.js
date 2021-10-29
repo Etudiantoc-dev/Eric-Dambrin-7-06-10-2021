@@ -1,42 +1,41 @@
-const bcrypt = require('bcrypt'); 
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/utilisateur');
 
 
 exports.signup = (req, res, next) => { //création ok avec format texte dans le body de talend API
   console.log(req.body)
-  bcrypt.hash(req.body.password, 10) 
-    .then(hash => { 
-  
-
-  if (!req.body) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-  }
-  const user = new User({ 
-
-    nom: req.body.nom,
-    prenom: req.body.prenom,
-    email: req.body.email,
-    password: hash
-  });
-
-  User.create(user, (err, data) => {
-    if (err) {
-      if (!user) { // ???
-        return res.status(401).json({ error });
+  bcrypt.hash(req.body.password, 10)
+    .then(hash => {
+      if (!req.body) {
+        res.status(400).send({
+          message: "Content can not be empty!"
+        });
       }
-    }
-    res.send(data);
-    console.log(data + 'Compte créé !');
-  })})
-  
+      const user = new User({
+
+        nom: req.body.nom,
+        prenom: req.body.prenom,
+        email: req.body.email,
+        password: hash
+      });
+
+      User.create(user, (err, data) => {
+        if (err) {
+          if (!user) { // ???
+            return res.status(401).json({ error });
+          }
+        }
+        res.send(data);
+        console.log(data + 'Compte créé !');
+      })
+    })
+
 }
 
-exports.login =(req, res, next) => { // ???
+exports.login = (req, res, next) => { // ???
 
-  
+
   User.findOne({ email: req.body.email })//Vérification si email inscrit correspond à un utilisateur existant
     .then(user => {
       if (!user) {
@@ -57,9 +56,10 @@ exports.login =(req, res, next) => { // ???
           });
         })
         .catch(error => res.status(500).json({ error }));
-    })}
+    })
+}
 
- 
+
 
 
 
