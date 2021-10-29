@@ -14,7 +14,8 @@ const normalizePort = val => {
   return false;
 };
 
-const port = normalizePort(process.env.PORT || '3306'); //Port par défaut si le port 3000 n'est pas disponible
+
+const port = normalizePort(process.env.PORT || '3000'); //Port par défaut si le port 3000 n'est pas disponible
 app.set('port', port); //Pour dire à l'application sur quel port elle va tourner
 
 const errorHandler = error => {

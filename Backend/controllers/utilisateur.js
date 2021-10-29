@@ -21,6 +21,7 @@ exports.signup = (req, res, next) => { //création ok avec format texte dans le 
     email: req.body.email,
     password: hash
   });
+
   User.create(user, (err, data) => {
     if (err) {
       if (!user) { // ???
@@ -34,7 +35,11 @@ exports.signup = (req, res, next) => { //création ok avec format texte dans le 
 }
 
 
+
+
 exports.login =(req, res, next) => { // ???
+
+  
   User.findOne({ email: req.body.email })//Vérification si email inscrit correspond à un utilisateur existant
     .then(user => {
       if (!user) {
