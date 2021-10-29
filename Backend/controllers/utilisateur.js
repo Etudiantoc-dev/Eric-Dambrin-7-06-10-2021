@@ -34,9 +34,6 @@ exports.signup = (req, res, next) => { //création ok avec format texte dans le 
   
 }
 
-
-
-
 exports.login =(req, res, next) => { // ???
 
   

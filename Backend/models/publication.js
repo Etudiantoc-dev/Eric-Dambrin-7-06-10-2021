@@ -9,9 +9,9 @@ const db = require('../Config/db');
 //         this.image = image;
 //     }
 const Publication = function (titre,article,image){
-    this.titre = titre;
-    this.article = article;
-    this.image = image;
+    this.prenom =prenom ;
+    this.commentaire = commentaire;
+    this.multimedia = multimedia;
 }
     // Publication.create = (newPublication) => {
     //     db.query("INSERT INTO publication SET ?", newPublication, (err, res) => {
