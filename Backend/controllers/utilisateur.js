@@ -13,6 +13,7 @@ exports.signup = (req, res, next) => { //création ok avec format texte dans le 
         });
       }
       const user = new User({
+  
 
         nom: req.body.nom,
         prenom: req.body.prenom,
