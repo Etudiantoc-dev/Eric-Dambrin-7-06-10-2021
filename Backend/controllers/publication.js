@@ -2,9 +2,9 @@ const fs = require("fs"); //= file System
 const Publication = require("../models/publication");
 const db = require("../Config/db")
 
-exports.createPublication = (req, res, next) => {//????
+exports.createPublication = (req, res, next) => {//ligne 9 status de undefined??
 
-  db.query(`INSERT INTO publication VALUES ( '${req.params.id}','${req.body.titre}', '${req.body.article}','${req.body.image}')`, (error) => {
+  db.query(`INSERT INTO publication VALUES ('${req.body.id}','${req.body.prenom}', '${req.body.commentaire}','${req.body.multimedia}')`, (error,res,field) => {
     if (error) {
       return res.status(400).json({
         error
@@ -39,13 +39,13 @@ exports.getAllPublications = (req, res, next) => {//ok
 }
 
 exports.modifyPublication = (req, res, next) => {//ok
-  db.query(`UPDATE publication SET titre = '${req.body.titre}', article = '${req.body.article}' WHERE publication.id = ${req.params.id}`, (error, result, field) => {
-    if (error) {
+  db.query(`UPDATE publication SET prenom= '${req.body.prenom}', commentaire = '${req.body.commentaire}' WHERE publication.id = ${req.params.id}`, (error, result, field) => {
+    if (error) { 
       return res.status(400).json({
         error
       });
     }
-    return res.status(200).json(result);
+    return res.status(200).json(result); 
   });
 };
 
