@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/utilisateur');
 
-
 exports.signup = (req, res, next) => { //création ok avec format texte dans le body de talend API
   console.log(req.body)
   bcrypt.hash(req.body.password, 10)
@@ -42,13 +41,11 @@ exports.login = (req, res, next) => { // ???
       }
       const user = new User({
 
-        nom: req.body.nom,
-        prenom: req.body.prenom,
         email: req.body.email,
         password: hash
       });
 
-User.findOne({ email: req.body.email }, user)//Vérification si email inscrit correspond à un utilisateur existant
+User.findOne({ email: req.body.email })//Vérification si email inscrit correspond à un utilisateur existant
         {
           if (!user) {
             return res.status(401).json({ error: 'Utilisateur non trouvé !' });
