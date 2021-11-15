@@ -13,20 +13,15 @@ const Publication = function (titre,article,image){
     this.commentaire = commentaire;
     this.multimedia = multimedia;
 }
-    // Publication.create = (newPublication) => {
-    //     db.query("INSERT INTO publication SET ?", newPublication, (err, res) => {
-
-    //         if (err) {
-    //             console.log("error: ", err);
-                
-    //             return;
-    //         }
-
-
-    //         console.log("created publication: ", { id: res.insertId, ...newPublication });
-            
-    //     })
-    // }
+Publication.createPublication= function(publication, result){
+    db.query(`INSERT INTO publication (prenom, commentaire, multimedia, utilisateur_id) VALUES('${publication.prenom}', '${publication.commentaire}','${publication.multimedia}',111)`, function(error,res) {
+      if (error) {
+        result(error, null);
+      } else {
+        result(null,res);
+      }
+    })};
+    
     Publication.find = (Publication) =>{
         db.query("SELECT * FROM publication", Publication,(err, res)=>{
             if (err) throw err;
