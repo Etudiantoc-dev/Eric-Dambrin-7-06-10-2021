@@ -4,16 +4,16 @@ const db = require("../Config/db")
 
 
 
-  exports.create = function(req, res){
-    var maPublication = new Publication();
-    Publication.createPublication(maPublication, function(error,publication){
-      if (error) {
-        res.send(error);
-      } 
-      res.send(publication);
-    });
-  };
-  
+exports.create = function (req, res) {
+  var maPublication = new Publication();
+  Publication.createPublication(maPublication, function (error, publication) {
+    if (error) {
+      res.send(error);
+    }
+    res.send(publication);
+  });
+};
+
 
 
 
@@ -41,12 +41,12 @@ exports.getAllPublications = (req, res, next) => {//ok
 
 exports.modifyPublication = (req, res, next) => {//ok
   db.query(`UPDATE publication SET prenom= '${req.body.prenom}', commentaire = '${req.body.commentaire}' WHERE publication.id = ${req.params.id}`, (error, result, field) => {
-    if (error) { 
+    if (error) {
       return res.status(400).json({
         error
       });
     }
-    return res.status(200).json(result); 
+    return res.status(200).json(result);
   });
 };
 
