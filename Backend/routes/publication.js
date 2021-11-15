@@ -4,7 +4,7 @@ const publicationsCtrl = require('../controllers/publication');
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer.config');
 
-router.post('/', multer, publicationsCtrl.createPublication);//Création 
+router.post('/', multer, publicationsCtrl.create);//Création 
 router.get('/:id', publicationsCtrl.getOnePublication);
 router.get('/', publicationsCtrl.getAllPublications);
 router.put('/:id', multer, publicationsCtrl.modifyPublication); // Modification

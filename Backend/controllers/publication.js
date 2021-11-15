@@ -2,19 +2,20 @@ const fs = require("fs"); //= file System
 const Publication = require("../models/publication");
 const db = require("../Config/db")
 
-exports.createPublication = (req, res, next) => {//ligne 9 status de undefined??
 
-  db.query(`INSERT INTO publication VALUES ('${req.body.id}','${req.body.prenom}', '${req.body.commentaire}','${req.body.multimedia}')`, (error,res,field) => {
-    if (error) {
-      return res.status(400).json({
-        error
-      });
-    }
-    return res.status(201).json({
-      message: 'Votre post à été publié !'
-    })
-  });
-};
+
+  exports.create = function(req, res){
+    var maPublication = new Publication();
+    Publication.createPublication(maPublication, function(error,publication){
+      if (error) {
+        res.send(error);
+      } 
+      res.send(publication);
+    });
+  };
+  
+
+
 
 exports.getOnePublication = (req, res, next) => {//ok
   db.query(`SELECT * FROM publication WHERE publication.id = ${req.params.id}`, (error, result, field) => {
