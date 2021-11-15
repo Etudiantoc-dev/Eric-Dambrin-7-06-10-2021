@@ -8,7 +8,7 @@ const db = require('../Config/db');
 //         this.article = article;
 //         this.image = image;
 //     }
-const Publication = function (titre,article,image){
+const Publication = function (prenom,commentaire,multimedia){
     this.prenom =prenom ;
     this.commentaire = commentaire;
     this.multimedia = multimedia;
@@ -29,6 +29,7 @@ Publication.createPublication= function(publication, result){
          })
         
     }
+
     Publication.findOne = (publication) =>{
         db.query("SELECT * FROM publication WHERE ID " , publication,(err, res)=>{
             if (err) throw err;
@@ -59,6 +60,7 @@ Publication.createPublication= function(publication, result){
 
 
 module.exports = Publication
+
 
 
 
